@@ -10,18 +10,7 @@ import { useAnimations, useGLTF } from "@react-three/drei";
 import { useControls } from "leva";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { GLTF } from "three-stdlib";
 import { DissolveMaterial } from "./DissolveMaterial";
-
-type GLTFResult = GLTF & {
-  nodes: {
-    Object_7: THREE.SkinnedMesh;
-    _rootJoint: THREE.Bone;
-  };
-  materials: {
-    Stormtroopermat: THREE.MeshStandardMaterial;
-  };
-};
 
 type ActionName = "mixamo.com";
 type GLTFActions = Record<ActionName, THREE.AnimationAction>;
@@ -29,8 +18,8 @@ type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 export function Model() {
   const group = useRef<THREE.Group>(null!);
   const { nodes, materials, animations } = useGLTF(
-    "/dancing_stormtrooper.glb"
-  ) as GLTFResult;
+    "/demo-2023-dissolve-shader/dancing_stormtrooper.glb"
+  ) as any;
 
   const { actions } = useAnimations(animations, group) as any as {
     actions: GLTFActions;
@@ -107,5 +96,3 @@ export function Model() {
     </group>
   );
 }
-
-useGLTF.preload("/dancing_stormtrooper.glb");

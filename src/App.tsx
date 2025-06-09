@@ -7,7 +7,6 @@ import {
 import { Canvas } from "@react-three/fiber";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { Leva } from "leva";
-import { Branding } from "./Branding";
 import { Model } from "./Model";
 
 function Scene() {
@@ -20,7 +19,7 @@ function Scene() {
       <Environment background preset="dawn" blur={0.8} />
 
       <Text
-        font="/font.ttf"
+        font={"/demo-2023-dissolve-shader/font.ttf"}
         position={[0, 2, 0]}
         scale={[2, 4, 2]}
         fillOpacity={0.75}
@@ -47,7 +46,6 @@ export default function App() {
       </div>
 
       <Leva collapsed />
-      <Branding />
     </>
   );
 }

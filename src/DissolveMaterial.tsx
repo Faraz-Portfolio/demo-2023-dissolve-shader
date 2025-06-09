@@ -1,10 +1,11 @@
-import * as THREE from "three";
-import * as React from "react";
-import CSM from "three-custom-shader-material";
-import { patchShaders } from "gl-noise";
 import { TransformControls } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { Vector3 } from "three";
+import * as React from "react";
+import * as THREE from "three";
+import CSM from "three-custom-shader-material";
+
+// @ts-ignore
+import { patchShaders } from "gl-noise/build/glNoise.m";
 
 interface DissolveMaterialProps {
   baseMaterial?: THREE.Material;
@@ -23,7 +24,7 @@ export function DissolveMaterial({
   feather = 2,
   color = "#14c445",
   intensity = 5,
-  debug = false
+  debug = false,
 }: DissolveMaterialProps) {
   const uniforms = React.useMemo(
     () => ({
@@ -34,11 +35,11 @@ export function DissolveMaterial({
           o.updateMatrixWorld();
 
           return o.matrixWorld;
-        })()
+        })(),
       },
       uFeather: { value: feather },
       uThickness: { value: thickness },
-      uColor: { value: new THREE.Color(color).multiplyScalar(intensity) }
+      uColor: { value: new THREE.Color(color).multiplyScalar(intensity) },
     }),
     []
   );
