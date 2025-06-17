@@ -15,7 +15,7 @@ function Scene() {
       <PerspectiveCamera makeDefault position={[0, 2, 8]} fov={40} />
       <Environment preset="apartment" />
       <Model />
-      <ContactShadows resolution={512} blur={2} />
+      <ContactShadows scale={[20, 20]} resolution={512} blur={2} />
       <Environment background preset="dawn" blur={0.8} />
 
       <Text
@@ -34,16 +34,14 @@ function Scene() {
 export default function App() {
   return (
     <>
-      <div className="canvas">
-        <Canvas shadows>
-          <fog attach="fog" args={["black", 15, 21.5]} />
-          <Scene />
+      <Canvas shadows>
+        <fog attach="fog" args={["black", 15, 21.5]} />
+        <Scene />
 
-          <EffectComposer>
-            <Bloom luminanceThreshold={2} mipmapBlur />
-          </EffectComposer>
-        </Canvas>
-      </div>
+        <EffectComposer>
+          <Bloom luminanceThreshold={2} mipmapBlur />
+        </EffectComposer>
+      </Canvas>
 
       <Leva collapsed />
     </>
