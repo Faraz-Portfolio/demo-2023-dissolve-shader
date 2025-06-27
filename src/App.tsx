@@ -12,7 +12,7 @@ import { Model } from "./Model";
 function Scene() {
   return (
     <>
-      <PerspectiveCamera makeDefault position={[0, 2, 8]} fov={40} />
+      <PerspectiveCamera makeDefault position={[0, 2, 10]} fov={40} />
       <Environment preset="apartment" />
       <Model />
       <ContactShadows scale={[20, 20]} resolution={512} blur={2} />
@@ -43,7 +43,12 @@ export default function App() {
         </EffectComposer>
       </Canvas>
 
-      <Leva collapsed />
+      <Leva
+        collapsed
+        titleBar={{
+          title: "Options",
+        }}
+      />
     </>
   );
 }

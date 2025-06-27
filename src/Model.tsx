@@ -8,7 +8,7 @@ Title: DANCING STORMTROOPER
 
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { useControls } from "leva";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { DissolveMaterial } from "./DissolveMaterial";
 
@@ -21,6 +21,12 @@ export function Model() {
     "/demo-2023-dissolve-shader/dancing_stormtrooper.glb"
   ) as any;
 
+  const baseMat = useMemo(
+    () => materials.Stormtroopermat.clone(),
+    [materials.Stormtroopermat]
+  );
+  useEffect(() => () => baseMat.dispose(), [baseMat]);
+
   const { actions } = useAnimations(animations, group) as any as {
     actions: GLTFActions;
   };
@@ -32,7 +38,7 @@ export function Model() {
 
   const props = useControls({
     debug: {
-      value: false,
+      value: true,
     },
     mode: {
       options: ["translate", "rotate", "scale"],
@@ -79,11 +85,9 @@ export function Model() {
                     geometry={nodes.Object_7.geometry}
                     // material={materials.Stormtroopermat}
                     skeleton={nodes.Object_7.skeleton}
+                    renderOrder={2}
                   >
-                    <DissolveMaterial
-                      baseMaterial={materials.Stormtroopermat}
-                      {...props}
-                    />
+                    <DissolveMaterial baseMaterial={baseMat} {...props} />
                   </skinnedMesh>
                   <group name="Object_6" />
                   <group name="Stormtrooper" />
