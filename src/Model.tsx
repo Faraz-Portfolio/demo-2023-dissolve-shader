@@ -15,15 +15,17 @@ import { DissolveMaterial } from "./DissolveMaterial";
 type ActionName = "mixamo.com";
 type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 
+const baseUrl = import.meta.env.BASE_URL;
+
 export function Model() {
   const group = useRef<THREE.Group>(null!);
   const { nodes, materials, animations } = useGLTF(
-    "/demo-2023-dissolve-shader/dancing_stormtrooper.glb"
+    baseUrl + "dancing_stormtrooper.glb",
   ) as any;
 
   const baseMat = useMemo(
     () => materials.Stormtroopermat.clone(),
-    [materials.Stormtroopermat]
+    [materials.Stormtroopermat],
   );
   useEffect(() => () => baseMat.dispose(), [baseMat]);
 
